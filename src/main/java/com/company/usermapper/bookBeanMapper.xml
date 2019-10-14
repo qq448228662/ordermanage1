@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.userdao.bookBeanMapper">
+  <resultMap id="BaseResultMap" type="com.company.userbean.bookBean">
+    <id column="bookid" jdbcType="INTEGER" property="bookid" />
+    <result column="bookdate" jdbcType="TIMESTAMP" property="bookdate" />
+    <result column="customername" jdbcType="VARCHAR" property="customername" />
+    <result column="productname" jdbcType="VARCHAR" property="productname" />
+    <result column="productnumber" jdbcType="INTEGER" property="productnumber" />
+    <result column="account" jdbcType="INTEGER" property="account" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    bookid, bookdate, customername, productname, productnumber, account, remark
+  </sql>
+  <select id="selectByPrimaryKey2" parameterType="com.company.userbean.bookBean" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from book
+    where bookid = #{bookid,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from book
+    where bookid = #{bookid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from book
+    where bookid = #{bookid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.company.userbean.bookBean">
+    insert into book (bookid, bookdate, customername, 
+      productname, productnumber, account, 
+      remark)
+    values (#{bookid,jdbcType=INTEGER}, #{bookdate,jdbcType=TIMESTAMP}, #{customername,jdbcType=VARCHAR}, 
+      #{productname,jdbcType=VARCHAR}, #{productnumber,jdbcType=INTEGER}, #{account,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.company.userbean.bookBean">
+    insert into book
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bookid != null">
+        bookid,
+      </if>
+      <if test="bookdate != null">
+        bookdate,
+      </if>
+      <if test="customername != null">
+        customername,
+      </if>
+      <if test="productname != null">
+        productname,
+      </if>
+      <if test="productnumber != null">
+        productnumber,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bookid != null">
+        #{bookid,jdbcType=INTEGER},
+      </if>
+      <if test="bookdate != null">
+        #{bookdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customername != null">
+        #{customername,jdbcType=VARCHAR},
+      </if>
+      <if test="productname != null">
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="productnumber != null">
+        #{productnumber,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.company.userbean.bookBean">
+    update book
+    <set>
+      <if test="bookdate != null">
+        bookdate = #{bookdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customername != null">
+        customername = #{customername,jdbcType=VARCHAR},
+      </if>
+      <if test="productname != null">
+        productname = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="productnumber != null">
+        productnumber = #{productnumber,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        account = #{account,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where bookid = #{bookid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.company.userbean.bookBean">
+    update book
+    set bookdate = #{bookdate,jdbcType=TIMESTAMP},
+      customername = #{customername,jdbcType=VARCHAR},
+      productname = #{productname,jdbcType=VARCHAR},
+      productnumber = #{productnumber,jdbcType=INTEGER},
+      account = #{account,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR}
+    where bookid = #{bookid,jdbcType=INTEGER}
+  </update>
+</mapper>
